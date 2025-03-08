@@ -61,6 +61,14 @@ export default function Home() {
       campus: "Athi River",
     };
 
+    const markData = 
+    {
+      studentID: admno,
+      date: "2025-03-04",
+      check_in: "present",
+      campus: "Athi River",
+    }
+
     const validation = studentSchema.safeParse(data);
     if (!validation.success) {
       const fieldErrors: Record<string, string> = {};
@@ -77,7 +85,7 @@ export default function Home() {
     setIsSubmitting(true);
     try {
       const response = await fetch(
-        "https://ch-backend.dita.co.ke/attendance/special",
+        "https://ch-backend.dita.co.ke/attendance/register",
         {
           method: "POST",
           mode: "no-cors",
@@ -86,7 +94,13 @@ export default function Home() {
         }
       );
       console.log("Response", response);
-      toast(`Response status: ${response.status}`);
+          fetch("https://ch-backend.dita.co.ke/attendance/mark" , 
+            {
+              method: 'POST',
+              mode: "no-cors",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify(markData),
+            }).then(response => console.log(`Student marked : ${response}`)).catch(err => console.log(err))
     } catch (error) {
       console.error("Error during POST:", error);
       toast.error("An error occurred while submitting the form.");
