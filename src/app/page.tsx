@@ -77,7 +77,7 @@ export default function Home() {
     setIsSubmitting(true);
     try {
       const response = await fetch(
-        "https://q2q18vht-8080.uks1.devtunnels.ms/attendance/register",
+        "https://ch-backend.dita.co.ke/attendance/register",
         {
           method: "POST",
           mode: "no-cors",
