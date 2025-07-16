@@ -56,18 +56,11 @@ export default function Home() {
       last_name: lname,
       email: email,
       gender: gender,
-      school: school,
+      school: "N/A",
       chapel_usher: false,
       campus: "Athi River",
     };
 
-    const markData = 
-    {
-      studentID: admno,
-      date: "2025-03-04",
-      check_in: "present",
-      campus: "Athi River",
-    }
 
     const validation = studentSchema.safeParse(data);
     if (!validation.success) {
@@ -94,13 +87,6 @@ export default function Home() {
         }
       );
       console.log("Response", response);
-          fetch("https://ch-backend.dita.co.ke/attendance/mark" , 
-            {
-              method: 'POST',
-              mode: "no-cors",
-              headers: { "Content-Type": "application/json" },
-              body: JSON.stringify(markData),
-            }).then(response => console.log(`Student marked : ${response}`)).catch(err => console.log(err))
     } catch (error) {
       console.error("Error during POST:", error);
       toast.error("An error occurred while submitting the form.");
